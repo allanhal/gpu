@@ -1,7 +1,7 @@
 import * as fs from "fs";
 import * as csv from "fast-csv";
 
-const data = [];
+export const data = [];
 fs.createReadStream("gpu.csv")
   .pipe(csv.parse({ headers: true }))
   .on("error", (error) => console.error(error))
