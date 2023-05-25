@@ -8,6 +8,8 @@
     "start": "node index.js"
   },
   "dependencies": {
-    "fast-csv": "^4.3.6"
+    "fast-csv": "^4.3.6",
+    "fuse.js": "^6.6.2",
+    "fuzzy-search": "^3.2.1"
   }
 }

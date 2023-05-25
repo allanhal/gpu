@@ -18,6 +18,7 @@
     }
   ],
   "background": {
+    "page": "background.html",
     "scripts": ["background.js"],
     "persistent": false
   }
