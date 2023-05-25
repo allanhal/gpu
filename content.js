@@ -11,13 +11,11 @@ setTimeout(async function () {
 
   const gpuNames = new Set();
   for (let rowNumber = 2; rowNumber < table?.rows?.length; rowNumber++) {
-    const benchMark = 1000;
     const text = table.rows[rowNumber].cells[0].innerHTML;
     const gpuName = text.split('<b>')[1].split('</b>')[0].trim();
     gpuNames.add(gpuName);
   }
   const uniqueGpus = Array.from(gpuNames);
-  console.log('uniqueGpus', uniqueGpus);
 
   const jsonData = await fetch('https://gpu-benchmark.onrender.com/', {
     method: 'POST',
@@ -40,7 +38,6 @@ setTimeout(async function () {
       [gpu.key]: gpu.result.value,
     };
   });
-  console.log('resultJson', resultJson);
 
   for (let rowNumber = 2; rowNumber < table?.rows?.length; rowNumber++) {
     const benchMark = 1000;
@@ -50,7 +47,8 @@ setTimeout(async function () {
     const price = table.rows[rowNumber].cells[1].innerHTML.split('&nbsp;')[1].split('.').join('').split(',').join('.');
     const perfCell = table.rows[rowNumber].insertCell(4);
     const ceCell = table.rows[rowNumber].insertCell(5);
-    perfCell.innerHTML = 'Price: ' + price + ' / Bench: ' + resultJson[gpuName];
+    perfCell.innerHTML = resultJson[gpuName];
+    // perfCell.innerHTML = 'Price: ' + price + ' / Bench: ' + resultJson[gpuName];
     ceCell.innerHTML = Number((benchMark / price) * 100).toFixed(2);
   }
 }, 1000);
